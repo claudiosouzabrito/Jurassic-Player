@@ -11,7 +11,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 //entrada de controle 
 void processInput(GLFWwindow *window)
 {
-    // função que recebe janela e tecla como entrada
+    // função que recebe janela e tecla "esc" como entrada
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
         glfwSetWindowShouldClose(window, true);
 }
