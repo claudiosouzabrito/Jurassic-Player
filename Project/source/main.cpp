@@ -1,12 +1,7 @@
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h> 
 #include <iostream>
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}  
+#include "functions.hpp"
 
 int main()
 {   
@@ -15,9 +10,8 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  
 
+    //objeto janela
     GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
 
     if (window == NULL)
@@ -29,6 +23,8 @@ int main()
 
     glfwMakeContextCurrent(window);
 
+    // função glad para carregar a função do openGL
+
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -37,16 +33,23 @@ int main()
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  
 
-
+    //Loop de renderização
     while(!glfwWindowShouldClose(window))
     {
         glfwSwapBuffers(window);
         glfwPollEvents();    
     }
-
+    //limpar memoria
     glfwTerminate();
-
-
-
     return 0;
+
+   //loop do controle de entrada de teclas
+    while (!glfwWindowShouldClose(window))
+{
+    processInput(window);
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}  
+
 }
